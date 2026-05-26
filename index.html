@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Gym Routine Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#6c63ff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>💪 My Gym</h1>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span class="icon-sun">☀️</span>
+                <span class="icon-moon">🌙</span>
+            </button>
+        </header>
+
+        <!-- Day Selector -->
+        <nav class="day-selector" id="daySelector">
+            <button class="day-btn active" data-day="monday">Mon</button>
+            <button class="day-btn" data-day="tuesday">Tue</button>
+            <button class="day-btn" data-day="wednesday">Wed</button>
+            <button class="day-btn" data-day="thursday">Thu</button>
+            <button class="day-btn" data-day="friday">Fri</button>
+            <button class="day-btn" data-day="saturday">Sat</button>
+            <button class="day-btn" data-day="sunday">Sun</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <div class="routine-header">
+                <h2 id="dayTitle">Monday</h2>
+                <button class="btn-add" id="addExercise" aria-label="Add exercise">+ Add Exercise</button>
+            </div>
+            <div class="exercise-list" id="exerciseList">
+                <!-- Exercises render here -->
+            </div>
+        </main>
+
+        <!-- Add/Edit Modal -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Add Exercise</h3>
+                    <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+                </div>
+                <form id="exerciseForm">
+                    <div class="form-group">
+                        <label for="exerciseName">Exercise Name</label>
+                        <input type="text" id="exerciseName" placeholder="e.g. Bench Press" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exerciseSets">Sets x Reps</label>
+                        <input type="text" id="exerciseSets" placeholder="e.g. 4x12">
+                    </div>
+                    <div class="form-group">
+                        <label for="exerciseWeight">Weight</label>
+                        <input type="text" id="exerciseWeight" placeholder="e.g. 135 lbs">
+                    </div>
+                    <div class="form-group">
+                        <label for="exerciseImage">Image URL</label>
+                        <input type="url" id="exerciseImage" placeholder="https://example.com/image.jpg">
+                    </div>
+                    <div class="form-group">
+                        <label for="exerciseVideo">YouTube Link</label>
+                        <input type="url" id="exerciseVideo" placeholder="https://youtube.com/watch?v=...">
+                    </div>
+                    <div class="form-group">
+                        <label for="exerciseNotes">Notes</label>
+                        <textarea id="exerciseNotes" placeholder="Form tips, rest time, etc." rows="3"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="btnCancel">Cancel</button>
+                        <button type="submit" class="btn-save">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
