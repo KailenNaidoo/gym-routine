@@ -19,6 +19,7 @@
     let currentDay = 'monday';
     let editingId = null;
     let routines = loadRoutines();
+    let dayMeta = loadDayMeta();
 
     // Day names
     const dayNames = {
@@ -41,7 +42,7 @@
 
     // Theme
     function loadTheme() {
-        const saved = localStorage.getItem('gym-theme') || 'light';
+        const saved = localStorage.getItem('gym-theme') || 'dark';
         document.documentElement.setAttribute('data-theme', saved);
     }
 
@@ -54,68 +55,199 @@
 
     // Routines storage
     function loadRoutines() {
-        const saved = localStorage.getItem('gym-routines');
+        const saved = localStorage.getItem('gym-routines-v2');
         if (saved) return JSON.parse(saved);
         return getDefaultRoutines();
     }
 
+    function loadDayMeta() {
+        const saved = localStorage.getItem('gym-daymeta-v2');
+        if (saved) return JSON.parse(saved);
+        return getDefaultDayMeta();
+    }
+
     function saveRoutines() {
-        localStorage.setItem('gym-routines', JSON.stringify(routines));
+        localStorage.setItem('gym-routines-v2', JSON.stringify(routines));
+    }
+
+    function saveDayMeta() {
+        localStorage.setItem('gym-daymeta-v2', JSON.stringify(dayMeta));
+    }
+
+    function getDefaultDayMeta() {
+        return {
+            monday: {
+                phase: 'Veg-Fast',
+                calories: 1535,
+                protein: 60,
+                trainingType: 'Rest / Active Recovery',
+                location: 'N/A',
+                duration: 0,
+                dietRules: ['Strictly plant-based/vegetarian', 'No meat, no dairy', 'High volume green vegetables'],
+                supplements: 'Creatine 5g in Full Activate Bottle'
+            },
+            tuesday: {
+                phase: 'Veg-Fast',
+                calories: 1535,
+                protein: 60,
+                trainingType: 'Solo Gym Session (No Sparring)',
+                location: 'Gym Floor & Heavy Bag Area',
+                duration: 45,
+                dietRules: ['Strictly plant-based/vegetarian', 'No meat, no dairy', 'Pre-workout hydration focus'],
+                supplements: 'Creatine 5g in Full Activate Bottle'
+            },
+            wednesday: {
+                phase: 'Normal Fueling',
+                calories: 1700,
+                protein: 110,
+                trainingType: 'Rest Day / Muscle Refueling',
+                location: 'N/A',
+                duration: 0,
+                dietRules: ['Refuel depleted glycogen', 'High protein', 'Key meals: Chicken & rice lunch, PB/Banana/Yogurt smoothie snack'],
+                supplements: 'Creatine 5g in Full Activate Bottle',
+                trackingAction: 'Take morning progress photo after shower (True Baseline)'
+            },
+            thursday: {
+                phase: 'Normal Fueling',
+                calories: 1700,
+                protein: 110,
+                trainingType: 'Home Skill Session',
+                location: 'Home / Mirror Space',
+                duration: 35,
+                dietRules: ['Consistent protein spacing', 'Balanced clean carbs'],
+                supplements: 'Creatine 5g in Full Activate Bottle'
+            },
+            friday: {
+                phase: 'Training Fuel',
+                calories: 1700,
+                protein: 120,
+                trainingType: 'Kickboxing Class',
+                location: 'Dojo / Fight Gym',
+                duration: 60,
+                dietRules: ['Increase carbs slightly before class', 'High hydration post-workout'],
+                supplements: 'Creatine 5g in Full Activate Bottle'
+            },
+            saturday: {
+                phase: 'Normal Fueling',
+                calories: 1600,
+                protein: 100,
+                trainingType: 'Rest Day',
+                location: 'N/A',
+                duration: 0,
+                dietRules: ['Maintenance recovery profile', 'Keep protein stable'],
+                supplements: 'Creatine 5g in Full Activate Bottle'
+            },
+            sunday: {
+                phase: 'Normal Fueling',
+                calories: 1600,
+                protein: 100,
+                trainingType: 'Active Recovery / Outdoor Rest',
+                location: 'Optional Trail / Outdoor Space',
+                duration: 60,
+                dietRules: ['Meal prep day', 'Source fresh vegetables for Monday fast'],
+                supplements: 'Creatine 5g in Full Activate Bottle'
+            }
+        };
     }
 
     function getDefaultRoutines() {
         return {
-            monday: [
-                {
-                    id: generateId(),
-                    name: 'Bench Press',
-                    sets: '4x10',
-                    weight: '135 lbs',
-                    image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=200&fit=crop',
-                    video: 'https://www.youtube.com/watch?v=rT7DgCr-3pg',
-                    notes: 'Keep shoulder blades pinched. Control the descent.',
-                    done: false
-                },
-                {
-                    id: generateId(),
-                    name: 'Incline Dumbbell Press',
-                    sets: '3x12',
-                    weight: '50 lbs',
-                    image: '',
-                    video: 'https://www.youtube.com/watch?v=8iPEnn-ltC8',
-                    notes: '30 degree incline. Full range of motion.',
-                    done: false
-                },
-                {
-                    id: generateId(),
-                    name: 'Cable Flyes',
-                    sets: '3x15',
-                    weight: '25 lbs',
-                    image: '',
-                    video: 'https://www.youtube.com/watch?v=Iwe6AmxVf7o',
-                    notes: 'Squeeze at the top. Slow negatives.',
-                    done: false
-                }
-            ],
+            monday: [],
             tuesday: [
                 {
                     id: generateId(),
-                    name: 'Barbell Squat',
-                    sets: '5x5',
-                    weight: '185 lbs',
-                    image: 'https://images.unsplash.com/photo-1566241142559-40e1dab266c6?w=400&h=200&fit=crop',
-                    video: 'https://www.youtube.com/watch?v=ultWZbUMPL8',
-                    notes: 'Break at hips first. Keep chest up.',
+                    name: 'Skipping Rope / Light Jogging',
+                    sets: '',
+                    weight: '',
+                    section: 'Warm-up',
+                    duration: '10 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=u3zgHI8QnqE',
+                    notes: 'Get heart rate up, loosen joints',
                     done: false
                 },
                 {
                     id: generateId(),
-                    name: 'Romanian Deadlift',
-                    sets: '4x10',
-                    weight: '155 lbs',
+                    name: 'Range Finder',
+                    sets: '',
+                    weight: '',
+                    section: 'Heavy Bag Round 1',
+                    duration: '3 min',
                     image: '',
-                    video: 'https://www.youtube.com/watch?v=7j-2w4-P14I',
-                    notes: 'Hinge at hips. Feel the hamstring stretch.',
+                    video: 'https://www.youtube.com/watch?v=bVbJhMjPUI4',
+                    notes: 'Straight jabs, crosses, teeps. 16oz Gloves.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Power Combinations',
+                    sets: '',
+                    weight: '',
+                    section: 'Heavy Bag Round 2',
+                    duration: '3 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=GhGSzy9QXOM',
+                    notes: 'Jab-Cross-Hook-Low Kick. 16oz Gloves.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Inside Combat',
+                    sets: '',
+                    weight: '',
+                    section: 'Heavy Bag Round 3',
+                    duration: '3 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=eMVqEbGSFkU',
+                    notes: 'Hooks, uppercuts, angles. 16oz Gloves.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Kick Engine',
+                    sets: '',
+                    weight: '',
+                    section: 'Heavy Bag Round 4',
+                    duration: '3 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=XzAVNKFQ3gQ',
+                    notes: 'Alternate roundhouses, balance focus. 16oz Gloves.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'The Burnout',
+                    sets: '',
+                    weight: '',
+                    section: 'Heavy Bag Round 5',
+                    duration: '3 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=XLmDMFnMfbM',
+                    notes: 'Rapid-fire punches/kicks non-stop. 16oz Gloves.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Lying Leg Raises',
+                    sets: '3x15',
+                    weight: '',
+                    section: 'Core Circuit',
+                    duration: '',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=JB2oyawG9KI',
+                    notes: 'Keep lower back pressed to floor. Controlled movement.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Plank Hold',
+                    sets: '',
+                    weight: '',
+                    section: 'Core Finisher',
+                    duration: '1 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=ASdvN_XEl_c',
+                    notes: 'Tight core, neutral spine. Breathe steady.',
                     done: false
                 }
             ],
@@ -123,39 +255,118 @@
             thursday: [
                 {
                     id: generateId(),
-                    name: 'Pull-ups',
-                    sets: '4x8',
-                    weight: 'Bodyweight',
-                    image: 'https://images.unsplash.com/photo-1598971639058-a25d6df8a97a?w=400&h=200&fit=crop',
-                    video: 'https://www.youtube.com/watch?v=eGo4IYlbE5g',
-                    notes: 'Full dead hang at bottom. Chin over bar.',
+                    name: 'Shadowboxing R1',
+                    sets: '',
+                    weight: '',
+                    section: 'Shadowboxing',
+                    duration: '3 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=ixkFHNBQPOo',
+                    notes: 'Pure footwork, head movement, quick jabs.',
                     done: false
                 },
                 {
                     id: generateId(),
-                    name: 'Barbell Row',
-                    sets: '4x10',
-                    weight: '135 lbs',
+                    name: 'Shadowboxing R2',
+                    sets: '',
+                    weight: '',
+                    section: 'Shadowboxing',
+                    duration: '3 min',
                     image: '',
-                    video: 'https://www.youtube.com/watch?v=FWJR5Ve8bnQ',
-                    notes: 'Pull to lower chest. Squeeze lats.',
+                    video: 'https://www.youtube.com/watch?v=ixkFHNBQPOo',
+                    notes: 'Adding combinations, hip rotation for air kicks.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Shadowboxing R3',
+                    sets: '',
+                    weight: '',
+                    section: 'Shadowboxing',
+                    duration: '3 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=ixkFHNBQPOo',
+                    notes: 'Full tactical pace — imagine opponent.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Strength Circuit',
+                    sets: '3 rounds',
+                    weight: 'Bodyweight',
+                    section: 'Strength',
+                    duration: '',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=IODxDxX7oi4',
+                    notes: 'Push-ups (15), Bodyweight Squats (20), Plank (45s). Repeat 3x.',
                     done: false
                 }
             ],
             friday: [
                 {
                     id: generateId(),
-                    name: 'Overhead Press',
-                    sets: '4x8',
-                    weight: '95 lbs',
+                    name: 'Class Warm-up',
+                    sets: '',
+                    weight: '',
+                    section: 'Warm-up',
+                    duration: '15 min',
                     image: '',
-                    video: 'https://www.youtube.com/watch?v=2yjwXTZQDDI',
-                    notes: 'Brace core. Lock out at top.',
+                    video: '',
+                    notes: 'High-intensity cardio & skipping.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Partner Drills',
+                    sets: '',
+                    weight: '',
+                    section: 'Drills',
+                    duration: '25 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=ZnYVLyqiR0c',
+                    notes: 'Combinations, pad work, explosive target training.',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Tactical Phase',
+                    sets: '',
+                    weight: '',
+                    section: 'Defense',
+                    duration: '15 min',
+                    image: '',
+                    video: 'https://www.youtube.com/watch?v=DfXE6UVNjuQ',
+                    notes: 'Defensive slips, intercepting drills (Teeps/Jabs).',
+                    done: false
+                },
+                {
+                    id: generateId(),
+                    name: 'Conditioning Blowout',
+                    sets: '',
+                    weight: '',
+                    section: 'Conditioning',
+                    duration: '5 min',
+                    image: '',
+                    video: '',
+                    notes: 'Dojo blowout circuit — Core/Bag burnout.',
                     done: false
                 }
             ],
             saturday: [],
-            sunday: []
+            sunday: [
+                {
+                    id: generateId(),
+                    name: 'Light Hiking / Walking',
+                    sets: '',
+                    weight: '',
+                    section: 'Active Recovery',
+                    duration: '60 min',
+                    image: '',
+                    video: '',
+                    notes: 'Optional light hiking or walking to keep active.',
+                    done: false
+                }
+            ]
         };
     }
 
@@ -189,21 +400,56 @@
     // Render
     function renderExercises() {
         const exercises = routines[currentDay] || [];
+        const meta = dayMeta[currentDay] || {};
+
+        let html = '';
+
+        // Day info card
+        html += `
+            <div class="day-info-card">
+                <div class="day-info-header">
+                    <span class="phase-badge">${escapeHtml(meta.phase || '')}</span>
+                    <span class="training-type">${escapeHtml(meta.trainingType || '')}</span>
+                </div>
+                <div class="day-info-stats">
+                    <div class="stat">
+                        <span class="stat-value">${meta.calories || 0}</span>
+                        <span class="stat-label">kcal</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">${meta.protein || 0}g</span>
+                        <span class="stat-label">protein</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">${meta.duration || 0}</span>
+                        <span class="stat-label">min</span>
+                    </div>
+                </div>
+                ${meta.location && meta.location !== 'N/A' ? `<div class="day-info-location">📍 ${escapeHtml(meta.location)}</div>` : ''}
+                <div class="day-info-diet">
+                    <span class="diet-label">🥗 Diet:</span>
+                    ${(meta.dietRules || []).map(r => `<span class="diet-tag">${escapeHtml(r)}</span>`).join('')}
+                </div>
+                <div class="day-info-supps">💊 ${escapeHtml(meta.supplements || '')}</div>
+                ${meta.trackingAction ? `<div class="day-info-tracking">📸 ${escapeHtml(meta.trackingAction)}</div>` : ''}
+            </div>
+        `;
 
         if (exercises.length === 0) {
-            exerciseList.innerHTML = `
+            html += `
                 <div class="empty-state">
-                    <div class="empty-icon">🏋️</div>
-                    <p>No exercises for ${dayNames[currentDay]}.<br>Tap "+ Add Exercise" to get started!</p>
+                    <div class="empty-icon">🧘</div>
+                    <p>Rest day — recover and refuel.<br>No training scheduled.</p>
                 </div>
             `;
+            exerciseList.innerHTML = html;
             return;
         }
 
         const doneCount = exercises.filter(e => e.done).length;
         const progressPercent = Math.round((doneCount / exercises.length) * 100);
 
-        let html = `
+        html += `
             <div class="progress-bar">
                 <div class="progress-track">
                     <div class="progress-fill" style="width: ${progressPercent}%"></div>
@@ -212,8 +458,14 @@
             </div>
         `;
 
+        let lastSection = '';
         exercises.forEach(exercise => {
-            const ytId = getYouTubeId(exercise.video);
+            // Section divider
+            if (exercise.section && exercise.section !== lastSection) {
+                html += `<div class="section-divider">${escapeHtml(exercise.section)}</div>`;
+                lastSection = exercise.section;
+            }
+
             html += `
                 <div class="exercise-card ${exercise.done ? 'completed' : ''}" data-id="${exercise.id}">
                     <div class="exercise-card-header">
@@ -225,6 +477,7 @@
                     </div>
                     <div class="exercise-meta">
                         ${exercise.sets ? `<span>📋 ${escapeHtml(exercise.sets)}</span>` : ''}
+                        ${exercise.duration ? `<span>⏱️ ${escapeHtml(exercise.duration)}</span>` : ''}
                         ${exercise.weight ? `<span>🏋️ ${escapeHtml(exercise.weight)}</span>` : ''}
                     </div>
                     ${exercise.image ? `<img class="exercise-image" src="${escapeHtml(exercise.image)}" alt="${escapeHtml(exercise.name)}" loading="lazy" onerror="this.style.display='none'">` : ''}
@@ -259,6 +512,8 @@
             document.getElementById('exerciseName').value = exercise.name || '';
             document.getElementById('exerciseSets').value = exercise.sets || '';
             document.getElementById('exerciseWeight').value = exercise.weight || '';
+            document.getElementById('exerciseDuration').value = exercise.duration || '';
+            document.getElementById('exerciseSection').value = exercise.section || '';
             document.getElementById('exerciseImage').value = exercise.image || '';
             document.getElementById('exerciseVideo').value = exercise.video || '';
             document.getElementById('exerciseNotes').value = exercise.notes || '';
@@ -284,6 +539,8 @@
             name: document.getElementById('exerciseName').value.trim(),
             sets: document.getElementById('exerciseSets').value.trim(),
             weight: document.getElementById('exerciseWeight').value.trim(),
+            duration: document.getElementById('exerciseDuration').value.trim(),
+            section: document.getElementById('exerciseSection').value.trim(),
             image: document.getElementById('exerciseImage').value.trim(),
             video: document.getElementById('exerciseVideo').value.trim(),
             notes: document.getElementById('exerciseNotes').value.trim(),

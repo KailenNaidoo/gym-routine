@@ -431,6 +431,138 @@ body {
     background: var(--accent-hover);
 }
 
+/* Day Info Card */
+.day-info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.day-info-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.phase-badge {
+    background: var(--accent);
+    color: #fff;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.training-type {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.day-info-stats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--bg-primary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.day-info-location {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.day-info-diet {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.diet-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.diet-tag {
+    font-size: 0.7rem;
+    background: var(--bg-primary);
+    color: var(--text-secondary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+}
+
+.day-info-supps {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.day-info-tracking {
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    border-left: 3px solid var(--accent);
+}
+
+/* Section Divider */
+.section-divider {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Form Row */
+.form-row {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
 /* Progress bar */
 .progress-bar {
     margin-top: 0.5rem;

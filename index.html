@@ -53,15 +53,25 @@
                 <form id="exerciseForm">
                     <div class="form-group">
                         <label for="exerciseName">Exercise Name</label>
-                        <input type="text" id="exerciseName" placeholder="e.g. Bench Press" required>
+                        <input type="text" id="exerciseName" placeholder="e.g. Heavy Bag Round 1" required>
                     </div>
                     <div class="form-group">
-                        <label for="exerciseSets">Sets x Reps</label>
-                        <input type="text" id="exerciseSets" placeholder="e.g. 4x12">
+                        <label for="exerciseSection">Section</label>
+                        <input type="text" id="exerciseSection" placeholder="e.g. Warm-up, Heavy Bag, Core">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="exerciseSets">Sets x Reps</label>
+                            <input type="text" id="exerciseSets" placeholder="e.g. 3x15">
+                        </div>
+                        <div class="form-group">
+                            <label for="exerciseDuration">Duration</label>
+                            <input type="text" id="exerciseDuration" placeholder="e.g. 3 min">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="exerciseWeight">Weight</label>
-                        <input type="text" id="exerciseWeight" placeholder="e.g. 135 lbs">
+                        <label for="exerciseWeight">Weight / Equipment</label>
+                        <input type="text" id="exerciseWeight" placeholder="e.g. 16oz Gloves">
                     </div>
                     <div class="form-group">
                         <label for="exerciseImage">Image URL</label>
@@ -73,7 +83,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exerciseNotes">Notes</label>
-                        <textarea id="exerciseNotes" placeholder="Form tips, rest time, etc." rows="3"></textarea>
+                        <textarea id="exerciseNotes" placeholder="Form tips, technique cues, etc." rows="3"></textarea>
                     </div>
                     <div class="form-actions">
                         <button type="button" class="btn-cancel" id="btnCancel">Cancel</button>
